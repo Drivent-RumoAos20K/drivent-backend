@@ -56,6 +56,17 @@ async function ticketProcessPayment(ticketId: number) {
   });
 }
 
+export function findTicketByEnrollmentAndTypeId(enrollmentId: number, ticketTypeId: number) {
+  return prisma.ticket.findFirst({
+    where: {
+      AND: {
+        ticketTypeId,
+        enrollmentId
+      }
+    }
+  });
+}
+
 export type CreateTicketParams = Omit<Ticket, "id" | "createdAt" | "updatedAt">
 
 const ticketRepository = {
@@ -65,6 +76,7 @@ const ticketRepository = {
   findTickeyById,
   findTickeWithTypeById,
   ticketProcessPayment,
+  findTicketByEnrollmentAndTypeId
 };
 
 export default ticketRepository;

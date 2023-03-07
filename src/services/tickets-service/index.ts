@@ -31,17 +31,17 @@ async function createTicket(userId: number, ticketTypeId: number) {
     throw notFoundError();
   }
 
+  const ticketAlreadyExists = await ticketRepository.findTicketByEnrollmentAndTypeId(enrollment.id, ticketTypeId);
+  if(ticketAlreadyExists) {
+    return ticketAlreadyExists;
+  }
   const ticketData = {
     ticketTypeId,
     enrollmentId: enrollment.id,
     status: TicketStatus.RESERVED
   };
 
-  await ticketRepository.createTicket(ticketData);
-
-  const ticket = await ticketRepository.findTicketByEnrollmentId(enrollment.id);
-
-  return ticket;
+  return ticketRepository.createTicket(ticketData);
 }
 
 const ticketService = {
