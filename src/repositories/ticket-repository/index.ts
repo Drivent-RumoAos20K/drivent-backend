@@ -41,6 +41,9 @@ async function createTicket(ticket: CreateTicketParams) {
   return prisma.ticket.create({
     data: {
       ...ticket,
+    }, 
+    include: {
+      TicketType: true
     }
   });
 }
@@ -63,6 +66,9 @@ export function findTicketByEnrollmentAndTypeId(enrollmentId: number, ticketType
         ticketTypeId,
         enrollmentId
       }
+    },
+    select: {
+      Enrollment: true
     }
   });
 }
