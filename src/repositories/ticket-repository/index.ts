@@ -66,9 +66,6 @@ export function findTicketByEnrollmentAndTypeId(enrollmentId: number, ticketType
         ticketTypeId,
         enrollmentId
       }
-    },
-    select: {
-      Enrollment: true
     }
   });
 }
