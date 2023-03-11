@@ -16,6 +16,64 @@ async function main() {
     });
   }
 
+  await prisma.ticketType.createMany({
+    data: [
+      {
+        name: "Ticket Online",
+        price: 100,
+        isRemote: true,
+        includesHotel: false,
+        createdAt: dayjs().toDate(),
+        updatedAt: dayjs().toDate(),
+      },
+      {
+        name: "Ticket Presencial",
+        price: 250,
+        isRemote: false,
+        includesHotel: false,
+        createdAt: dayjs().toDate(),
+        updatedAt: dayjs().toDate(),
+      },
+      {
+        name: "Ticket Presencial + Hotel",
+        price: 600,
+        isRemote: false,
+        includesHotel: true,
+        createdAt: dayjs().toDate(),
+        updatedAt: dayjs().toDate(),
+      },
+    ],
+  });
+
+  await prisma.enrollment.create({
+    data: {
+      id: 1,
+      name: "teste",
+      cpf: "12345678912",
+      birthday: dayjs().toDate(),
+      phone: "44999442233",
+      userId: 1,
+      createdAt: dayjs().toDate(),
+      updatedAt: dayjs().toDate(),
+    },
+  });
+
+  await prisma.address.create({
+    data: {
+      id: 1,
+      cep: "99999999",
+      street: "Teste",
+      city: "Teste",
+      state: "AC",
+      number: "111",
+      neighborhood: "Teste",
+      addressDetail: "Teste",
+      enrollmentId: 1,
+      createdAt: dayjs().toDate(),
+      updatedAt: dayjs().toDate(),
+    },
+  });
+
   console.log({ event });
 }
 
