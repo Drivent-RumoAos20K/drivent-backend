@@ -16,13 +16,12 @@ async function signIn(params: SignInParams): Promise<SignInResult> {
   await validatePasswordOrFail(password, user.password);
 
   const token = await createSession(user.id);
-
   const statusPayment = await findStatusPaymentByUserId(user.id) as unknown;
 
   return {
     user: exclude(user, "password"),
     token,
-    statusPayment: statusPayment as TicketStatus
+    statusPayment: statusPayment as TicketStatus || null
   };
 }
 
@@ -55,6 +54,7 @@ enum TicketStatus {
 
 async function findStatusPaymentByUserId(userId: number) {
   const enrollmentId = await enrollmentRepository.findWithAddressByUserId(userId);
+  if(!enrollmentId) return "RESERVED";
   const ticket = await ticketRepository.findTicketByEnrollmentId(enrollmentId.id);
   return ticket.status;
 }

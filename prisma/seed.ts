@@ -74,6 +74,73 @@ async function main() {
     },
   });
 
+  await prisma.hotel.createMany({
+    data: [
+      {
+        name: "Driven Resort",
+        image: "https://media-cdn.tripadvisor.com/media/photo-s/22/25/ce/ea/kingsford-hotel-manila.jpg"
+      },
+      {
+        name: "Driven Palace",
+        image: "https://cdn.britannica.com/94/148994-050-3EFF8DCB/Buckingham-Palace-Queen-Victoria-Memorial-London-statue.jpg"
+      },
+      {
+        name: "Driven World",
+        image: "https://www.rwlasvegas.com/wp-content/uploads/2021/10/exterior-2.jpg"
+      },
+    ]
+  });
+
+  await prisma.room.createMany({
+    data: [
+      {
+        hotelId: 1,
+        name: "01",
+        capacity: 3
+      },
+      {
+        hotelId: 1,
+        name: "02",
+        capacity: 2
+      },
+      {
+        hotelId: 1,
+        name: "03",
+        capacity: 1
+      },
+      {
+        hotelId: 2,
+        name: "01",
+        capacity: 3
+      },
+      {
+        hotelId: 2,
+        name: "02",
+        capacity: 2
+      },
+      {
+        hotelId: 2,
+        name: "03",
+        capacity: 1
+      },
+      {
+        hotelId: 3,
+        name: "01",
+        capacity: 3
+      },
+      {
+        hotelId: 3,
+        name: "02",
+        capacity: 2
+      },
+      {
+        hotelId: 3,
+        name: "03",
+        capacity: 1
+      },
+    ]
+  });
+
   console.log({ event });
 }
 
