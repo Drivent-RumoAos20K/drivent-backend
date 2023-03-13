@@ -3,7 +3,7 @@ import sessionRepository from "@/repositories/session-repository";
 import ticketRepository from "@/repositories/ticket-repository";
 import userRepository from "@/repositories/user-repository";
 import { exclude } from "@/utils/prisma-utils";
-import { User } from "@prisma/client";
+import { Ticket, User } from "@prisma/client";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { invalidCredentialsError } from "./errors";
@@ -16,12 +16,10 @@ async function signIn(params: SignInParams): Promise<SignInResult> {
   await validatePasswordOrFail(password, user.password);
 
   const token = await createSession(user.id);
-  const statusPayment = await findStatusPaymentByUserId(user.id) as unknown;
 
   return {
     user: exclude(user, "password"),
     token,
-    statusPayment: statusPayment as TicketStatus || null
   };
 }
 
@@ -47,24 +45,11 @@ async function validatePasswordOrFail(password: string, userPassword: string) {
   if (!isPasswordValid) throw invalidCredentialsError();
 }
 
-enum TicketStatus {
-  RESERVED,
-  PAID
-}
-
-async function findStatusPaymentByUserId(userId: number) {
-  const enrollmentId = await enrollmentRepository.findWithAddressByUserId(userId);
-  if(!enrollmentId) return "RESERVED";
-  const ticket = await ticketRepository.findTicketByEnrollmentId(enrollmentId.id);
-  return ticket.status;
-}
-
 export type SignInParams = Pick<User, "email" | "password">;
 
 type SignInResult = {
   user: Pick<User, "id" | "email">;
   token: string;
-  statusPayment: TicketStatus
 };
 
 type GetUserOrFailResult = Pick<User, "id" | "email" | "password">;
