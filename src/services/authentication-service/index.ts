@@ -1,7 +1,9 @@
+import enrollmentRepository from "@/repositories/enrollment-repository";
 import sessionRepository from "@/repositories/session-repository";
+import ticketRepository from "@/repositories/ticket-repository";
 import userRepository from "@/repositories/user-repository";
 import { exclude } from "@/utils/prisma-utils";
-import { User } from "@prisma/client";
+import { Ticket, User } from "@prisma/client";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { invalidCredentialsError } from "./errors";
