@@ -1,7 +1,7 @@
-import { notFoundError, unauthorizedError } from "@/errors";
-import paymentRepository, { PaymentParams } from "@/repositories/payment-repository";
-import ticketRepository from "@/repositories/ticket-repository";
+import { conflictError, notFoundError, unauthorizedError } from "@/errors";
 import enrollmentRepository from "@/repositories/enrollment-repository";
+import paymentRepository from "@/repositories/payment-repository";
+import ticketRepository from "@/repositories/ticket-repository";
 
 async function verifyTicketAndEnrollment(ticketId: number, userId: number) {
   const ticket = await ticketRepository.findTickeyById(ticketId);
@@ -31,6 +31,10 @@ async function paymentProcess(ticketId: number, userId: number, cardData: CardPa
   await verifyTicketAndEnrollment(ticketId, userId);
 
   const ticket = await ticketRepository.findTickeWithTypeById(ticketId);
+
+  if(ticket.status === "PAID") {
+    throw conflictError("This ticket already it's paid");
+  }
 
   const paymentData = {
     ticketId,
