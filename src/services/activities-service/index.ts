@@ -1,7 +1,8 @@
-import activitiesRepository from "@/repositories/activities-repository";
+import locationRepository from "@/repositories/location-repository";
 
 async function listActivities(dayId: number) {
-  return await activitiesRepository.listActivities(dayId);
+  // const a = await activitiesRepository.listActivities(dayId);
+  return await locationRepository.findLocationActivities(dayId);
 }
 
 const activitiesService = {
