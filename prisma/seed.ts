@@ -16,34 +16,34 @@ async function main() {
     });
   }
 
-  // await prisma.ticketType.createMany({
-  //   data: [
-  //     {
-  //       name: "Ticket Online",
-  //       price: 100,
-  //       isRemote: true,
-  //       includesHotel: false,
-  //       createdAt: dayjs().toDate(),
-  //       updatedAt: dayjs().toDate(),
-  //     },
-  //     {
-  //       name: "Ticket Presencial",
-  //       price: 250,
-  //       isRemote: false,
-  //       includesHotel: false,
-  //       createdAt: dayjs().toDate(),
-  //       updatedAt: dayjs().toDate(),
-  //     },
-  //     {
-  //       name: "Ticket Presencial + Hotel",
-  //       price: 600,
-  //       isRemote: false,
-  //       includesHotel: true,
-  //       createdAt: dayjs().toDate(),
-  //       updatedAt: dayjs().toDate(),
-  //     },
-  //   ],
-  // });
+  /* await prisma.ticketType.createMany({
+    data: [
+      {
+        name: "Ticket Online",
+        price: 100,
+        isRemote: true,
+        includesHotel: false,
+        createdAt: dayjs().toDate(),
+        updatedAt: dayjs().toDate(),
+      },
+      {
+        name: "Ticket Presencial",
+        price: 250,
+        isRemote: false,
+        includesHotel: false,
+        createdAt: dayjs().toDate(),
+        updatedAt: dayjs().toDate(),
+      },
+      {
+        name: "Ticket Presencial + Hotel",
+        price: 600,
+        isRemote: false,
+        includesHotel: true,
+        createdAt: dayjs().toDate(),
+        updatedAt: dayjs().toDate(),
+      },
+    ],
+  });*/ 
 
   // await prisma.enrollment.create({
   //   data: {
@@ -141,7 +141,16 @@ async function main() {
   //   ]
   // });
 
-  await prisma.daysActivities.createMany({
+
+
+
+
+
+
+
+
+
+  /* await prisma.daysActivities.createMany({
     data: [
       {
         data: new Date("2023-03-24T03:24:00")
@@ -291,7 +300,7 @@ async function main() {
         dayId: 3
       }
     ]
-  });
+  });*/
 
   console.log({ event });
 }
