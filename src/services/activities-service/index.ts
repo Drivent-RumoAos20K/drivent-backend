@@ -1,10 +1,11 @@
 import { alreadyRegisteredError, noVacancyError, schedulesConflictError } from "@/errors/activities-error";
 import activitiesRepository from "@/repositories/activities-repository";
-import { Console } from "console";
-import { func } from "joi";
+
+import locationRepository from "@/repositories/location-repository";
+
 
 async function listActivities(dayId: number) {
-  return await activitiesRepository.listActivities(dayId);
+  return await locationRepository.findLocationActivities(dayId);
 }
 
 async function signUp(userId: number, activitieId: number) {
