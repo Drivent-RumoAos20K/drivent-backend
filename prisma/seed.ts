@@ -16,7 +16,7 @@ async function main() {
     });
   }
 
-  /* await prisma.ticketType.createMany({
+  await prisma.ticketType.createMany({
     data: [
       {
         name: "Ticket Online",
@@ -43,37 +43,7 @@ async function main() {
         updatedAt: dayjs().toDate(),
       },
     ],
-  });*/ 
-  //});
-
-  // await prisma.enrollment.create({
-  //   data: {
-  //     id: 1,
-  //     name: "teste",
-  //     cpf: "12345678912",
-  //     birthday: dayjs().toDate(),
-  //     phone: "44999442233",
-  //     userId: 1,
-  //     createdAt: dayjs().toDate(),
-  //     updatedAt: dayjs().toDate(),
-  //   },
-  // });
-
-  // await prisma.address.create({
-  //   data: {
-  //     id: 1,
-  //     cep: "99999999",
-  //     street: "Teste",
-  //     city: "Teste",
-  //     state: "AC",
-  //     number: "111",
-  //     neighborhood: "Teste",
-  //     addressDetail: "Teste",
-  //     enrollmentId: 1,
-  //     createdAt: dayjs().toDate(),
-  //     updatedAt: dayjs().toDate(),
-  //   },
-  // });
+  });
 
   await prisma.hotel.createMany({
     data: [
@@ -142,16 +112,7 @@ async function main() {
     ]
   });
 
-
-
-
-
-
-
-
-
-
-  /* await prisma.daysActivities.createMany({
+  await prisma.daysActivities.createMany({
     data: [
       {
         data: new Date("2023-03-24T03:24:00")
@@ -301,7 +262,7 @@ async function main() {
         dayId: 3
       }
     ]
-  });*/
+  });
 
   console.log({ event });
 }
