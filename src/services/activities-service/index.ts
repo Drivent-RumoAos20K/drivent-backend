@@ -2,6 +2,7 @@ import { alreadyRegisteredError, noVacancyError, schedulesConflictError } from "
 import activitiesRepository from "@/repositories/activities-repository";
 
 import locationRepository from "@/repositories/location-repository";
+import { func } from "joi";
 
 
 async function listActivities(dayId: number) {
@@ -9,7 +10,7 @@ async function listActivities(dayId: number) {
 }
 
 async function signUp(userId: number, activitieId: number) {
-  
+
   const activity = await activitiesRepository.findActivityById(activitieId)
 
   let usuarioJaRegistrado = activity.User.some((participante) => {
@@ -21,9 +22,11 @@ async function signUp(userId: number, activitieId: number) {
   }
 
   const { checkDate, userActivity } = await activitiesRepository.activityConflicts(userId, activitieId)
+  let start1 = checkDate.startAt;
+  let end1 = checkDate.endAt
 
   for (let i = 0; i < userActivity.Activities.length; i++) {
-    if (checkDate === userActivity.Activities[i]) {
+    if (start1 < userActivity.Activities[i].endAt && end1 > userActivity.Activities[i].startAt) {
       throw schedulesConflictError()
     }
   }
@@ -34,12 +37,18 @@ async function signUp(userId: number, activitieId: number) {
   throw noVacancyError()
 }
 
+async function isSubscribed(userId: number) {
+  const activitiesUser = await activitiesRepository.isSubscribed(userId)
+  return activitiesUser.map(activitie => activitie.id)
+
+}
 
 
 
 const activitiesService = {
   listActivities,
-  signUp
+  signUp,
+  isSubscribed
 };
 
 export default activitiesService;
