@@ -16,7 +16,7 @@ async function main() {
     });
   }
 
-  /* await prisma.ticketType.createMany({
+  await prisma.ticketType.createMany({
     data: [
       {
         name: "Ticket Online",
@@ -43,7 +43,7 @@ async function main() {
         updatedAt: dayjs().toDate(),
       },
     ],
-  });*/ 
+  });
   //});
 
   // await prisma.enrollment.create({
@@ -142,25 +142,16 @@ async function main() {
     ]
   });
 
-
-
-
-
-
-
-
-
-
-  /* await prisma.daysActivities.createMany({
+  await prisma.daysActivities.createMany({
     data: [
       {
-        data: new Date("2023-03-24T03:24:00")
+        data: new Date("2023-05-05T03:24:00")
       },
       {
-        data: new Date("2023-03-25T03:24:00")
+        data: new Date("2023-05-06T03:24:00")
       },
       {
-        data: new Date("2023-03-24T03:24:00")
+        data: new Date("2023-05-07T03:24:00")
       }
     ]
   });
@@ -301,9 +292,7 @@ async function main() {
         dayId: 3
       }
     ]
-  });*/
-
-  console.log({ event });
+  });
 }
 
 main()
