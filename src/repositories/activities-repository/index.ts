@@ -55,6 +55,7 @@ async function activityConflicts(userId: number, activitieId: number) {
     where: { id: activitieId },
     select: {
       startAt: true,
+      endAt:true
     },
   })
 
@@ -64,6 +65,7 @@ async function activityConflicts(userId: number, activitieId: number) {
       Activities: {
         select: {
           startAt: true,
+          endAt:true
         }
       }
 
@@ -72,11 +74,18 @@ async function activityConflicts(userId: number, activitieId: number) {
   return { checkDate, userActivity } 
 }
 
+async function isSubscribed(userId: number) {
+  return await prisma.user.findUnique({
+     where:{id:userId},
+   }).Activities()
+ }
+
 const activitiesRepository = {
   listActivities,
   createActivities,
   findActivityById,
-  activityConflicts
+  activityConflicts,
+  isSubscribed
 };
 
 export default activitiesRepository;
